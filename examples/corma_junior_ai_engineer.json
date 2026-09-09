@@ -1,0 +1,63 @@
+{
+  "company": "Corma",
+  "position": "Junior AI Engineer",
+  "location": "Paris, France",
+  "contract": "Full-Time",
+  "description": "AI Engineer working on agentic AI systems, LLMs, RAG, semantic search, AI experimentation, model development, evaluation, reliability and production AI systems.",
+  "seniority": "Junior / recent graduate",
+  "min_years_experience": 0,
+  "education_required": "Master",
+  "education_fields": [
+    "Engineering",
+    "Computer Science",
+    "Data Science"
+  ],
+  "technical_requirements": [
+    {
+      "name": "Python",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Machine Learning fundamentals",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Search",
+      "importance": "mandatory"
+    },
+    {
+      "name": "RAG",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Semantic search",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Vector databases",
+      "importance": "preferred"
+    },
+    {
+      "name": "Agents",
+      "importance": "mandatory"
+    },
+    {
+      "name": "LLM observability",
+      "importance": "preferred"
+    },
+    {
+      "name": "Model evaluation",
+      "importance": "mandatory"
+    },
+    {
+      "name": "LLMs / agentic systems",
+      "importance": "preferred"
+    }
+  ],
+  "languages": {
+    "English": "fluent"
+  },
+  "other_requirements": [
+    "Education: Master's in engineering / MINT field or PhD in related subject."
+  ]
+}

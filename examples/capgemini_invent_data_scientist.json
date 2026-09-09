@@ -1,0 +1,77 @@
+{
+  "company": "Capgemini Invent",
+  "position": "Consultante / Consultant Data Scientist",
+  "location": "Issy-les-Moulineaux, France",
+  "description": "Junior Data Scientist consulting role in Data Science, AI and GenAI.",
+  "seniority": "Junior / recent graduate",
+  "education_required": "Master",
+  "education_fields": [
+    "Statistics",
+    "Applied Mathematics",
+    "Machine Learning",
+    "Computer Science"
+  ],
+  "technical_requirements": [
+    {
+      "name": "Machine learning",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Deep learning",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Python",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Database technologies",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Hadoop / Spark",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Pandas",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Scikit-learn",
+      "importance": "mandatory"
+    },
+    {
+      "name": "TensorFlow",
+      "importance": "mandatory"
+    },
+    {
+      "name": "NLP / LLM",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Computer Vision",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Time series",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Data visualization / web apps",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Model production and maintenance",
+      "importance": "mandatory"
+    },
+    {
+      "name": "Cloud (AWS/Azure/GCP)",
+      "importance": "preferred"
+    }
+  ],
+  "other_requirements": [
+    "Education: Bac+5 or PhD in Statistics, Applied Mathematics, Machine Learning or Computer Science.",
+    "English and communication skills; the source does not state an English proficiency level.",
+    "Cloud experience with AWS, Azure or GCP is a plus."
+  ]
+}

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cdi-application-assistant"
+version = "0.1.0"
+description = "Transparent local evaluator for France Data/AI CDI offers"
+requires-python = ">=3.11"
+dependencies = ["pypdf>=6.0"]
+
+[project.optional-dependencies]
+test = ["reportlab>=5.0"]
+
+[project.scripts]
+cdi-evaluate = "cdi_assistant.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

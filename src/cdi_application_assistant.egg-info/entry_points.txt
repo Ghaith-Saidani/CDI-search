@@ -1,0 +1,2 @@
+[console_scripts]
+cdi-evaluate = cdi_assistant.cli:main

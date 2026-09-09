@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/cdi_application_assistant.egg-info/PKG-INFO
+src/cdi_application_assistant.egg-info/SOURCES.txt
+src/cdi_application_assistant.egg-info/dependency_links.txt
+src/cdi_application_assistant.egg-info/entry_points.txt
+src/cdi_application_assistant.egg-info/top_level.txt
+src/cdi_assistant/__init__.py
+src/cdi_assistant/cli.py
+src/cdi_assistant/models.py
+src/cdi_assistant/scoring.py
+src/cdi_assistant/service.py
+tests/test_scoring.py

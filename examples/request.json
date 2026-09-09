@@ -1,0 +1,28 @@
+{
+  "candidate": {
+    "confirmed_skills": ["Python", "SQL", "Docker"],
+    "partial_skills": ["Airflow"],
+    "years_experience": 1,
+    "degree_level": "Master",
+    "degree_fields": ["Data Science"],
+    "languages": {"French": "native", "English": "B2"}
+  },
+  "job": {
+    "company": "Example Data",
+    "position": "Junior Data Engineer",
+    "location": "Lyon, France",
+    "contract": "CDI",
+    "description": "Build data pipelines with Python and SQL on a modern data platform.",
+    "seniority": "Junior / jeune diplômé",
+    "min_years_experience": 1,
+    "education_required": "Master",
+    "education_fields": ["Data", "Computer Science"],
+    "technical_requirements": [
+      {"name": "Python", "importance": "mandatory"},
+      {"name": "SQL", "importance": "mandatory"},
+      {"name": "Airflow", "importance": "preferred"},
+      {"name": "Docker", "importance": "preferred"}
+    ],
+    "languages": {"English": "B2"}
+  }
+}
