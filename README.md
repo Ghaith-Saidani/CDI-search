@@ -1,10 +1,23 @@
 # CDI Application Assistant
 
-Small, local, dependency-free evaluator for French Data/AI CDI job offers. It produces a transparent JSON report using only evidence present in the candidate profile.
+Decision-support system for managing a France-wide Data/AI CDI search, from job discovery and normalization to candidate matching and application follow-up.
 
-## Run
+## Current capabilities
 
-From the repository root, install the local package once:
+- Transparent 100-point job-offer evaluator.
+- Candidate profile with evidence-aware technical matching.
+- France-wide Data/AI search-query portfolio covering 11 target role families.
+- Pluggable `JobSource` interface for job providers.
+- France Travail Offers API adapter using OAuth2 client credentials.
+- Normalized `JobDiscovery` records with source IDs, dates, descriptions, contract, remote, salary, experience and skills.
+- SQLite persistence with deterministic upserts and source-level deduplication.
+- Discovery orchestration across multiple providers.
+
+The system is deliberately designed so providers can be added without changing the matching logic.
+
+## Run the evaluator
+
+From the repository root:
 
 ```powershell
 python -m pip install -e .
@@ -18,25 +31,62 @@ For normal use, keep your verified profile in `data/candidate_profile.json` and 
 python -m cdi_assistant.cli --job examples/job_offer.json
 ```
 
-PowerShell note: use `cdi_assistant.cli` exactly as written. Do not add a backslash before the underscore. The `examples/request.json` path is relative to the repository root, so run these commands from `CDI-search`, not `src`.
+## Run job discovery
+
+The first live provider is France Travail. API credentials are intentionally supplied through environment variables rather than committed to the repository:
+
+```powershell
+$env:FRANCE_TRAVAIL_CLIENT_ID = "your-client-id"
+$env:FRANCE_TRAVAIL_CLIENT_SECRET = "your-client-secret"
+
+python -m cdi_assistant.discovery_cli --source france-travail
+```
+
+The command generates the configured search portfolio, queries the provider, deduplicates the results and stores them in `data/jobs.db`.
+
+For a small smoke run:
+
+```powershell
+python -m cdi_assistant.discovery_cli --source france-travail --max-queries 2
+```
+
+Do not commit API credentials. The discovery CLI fails clearly when France Travail credentials are missing.
 
 ## Tests
-
-Tests use only Python's standard library:
 
 ```powershell
 python -m unittest discover -s tests -v
 ```
 
-## Input
+## Architecture
 
-The CLI accepts one JSON object with `candidate` and `job` properties. Start from `examples/candidate.template.json`; populate only facts you can support. `confirmed_skills`, `partial_skills`, years of experience, degree, and languages are all optional, but omitted facts are reported as unknown rather than credited.
+```text
+Search configuration
+        |
+        v
+Query portfolio ---> JobSource adapters ---> JobDiscovery normalization
+                                             |
+                                             v
+                                      deduplication
+                                             |
+                                             v
+                                        SQLite store
+                                             |
+                                             v
+                                      candidate matching
+                                             |
+                                             v
+                                  ranking / application workflow
+```
 
-`job.technical_requirements` entries have `name` and an optional `importance` (`mandatory`, `preferred`, or `nice_to_have`). `job.languages` maps language names to a requested level such as `B2`, `C1`, or `fluent`.
+### Planned provider strategy
 
-## Design
+1. France Travail API — first structured provider.
+2. Search-engine/company-career discovery — broad complementary discovery.
+3. Apec — later, subject to the appropriate partner/API access.
+4. Optional LinkedIn / Indeed / Welcome to the Jungle adapters only where access and source terms permit.
 
-The application intentionally has no database, web scraping, or LLM dependency. Its request and response are stable JSON boundaries for a later Excel tracker or LLM enrichment layer. The scoring rules are in one readable module and can be adjusted without changing the CLI or data models.
+The system should automate discovery, filtering, analysis and ranking; the user remains the final decision-maker for applications.
 
 ## Scoring
 
