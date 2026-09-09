@@ -12,6 +12,8 @@ Decision-support system for managing a France-wide Data/AI CDI search, from job 
 - Normalized `JobDiscovery` records with source IDs, dates, descriptions, contract, remote, salary, experience and skills.
 - SQLite persistence with deterministic upserts and source-level deduplication.
 - Discovery orchestration across multiple providers.
+- Direct conversion of discovered offers into the existing candidate-matching engine.
+- Ranked shortlist output with score, priority, decision, role family, strengths, gaps, red flags and recommended CV.
 
 The system is deliberately designed so providers can be added without changing the matching logic.
 
@@ -50,6 +52,28 @@ For a small smoke run:
 python -m cdi_assistant.discovery_cli --source france-travail --max-queries 2
 ```
 
+## Discover + match + rank
+
+Use `--match` to send the newly discovered offers directly through the existing 100-point evaluator:
+
+```powershell
+python -m cdi_assistant.discovery_cli --source france-travail --match --top 20
+```
+
+The command uses `data/candidate_profile.json` by default. You can provide another verified profile with `--profile` and another database with `--db`.
+
+The ranked output contains:
+
+- match score and priority;
+- final application decision;
+- detected role family;
+- strong matches and gaps;
+- red flags;
+- recommended CV variant;
+- source ID and application URL.
+
+The discovery-to-matching conversion is deliberately conservative: structured source skills become preferred technical requirements, while seniority, experience and education are inferred only from explicit wording in the normalized offer. The underlying evaluator remains responsible for the final score and hard gate.
+
 Do not commit API credentials. The discovery CLI fails clearly when France Travail credentials are missing.
 
 ## Tests
@@ -57,6 +81,8 @@ Do not commit API credentials. The discovery CLI fails clearly when France Trava
 ```powershell
 python -m unittest discover -s tests -v
 ```
+
+The discovery matching tests cover normalization into `JobOffer` objects and deterministic ranking by the existing evaluator score.
 
 ## Architecture
 
@@ -73,10 +99,13 @@ Query portfolio ---> JobSource adapters ---> JobDiscovery normalization
                                         SQLite store
                                              |
                                              v
-                                      candidate matching
+                                  candidate matching
                                              |
                                              v
-                                  ranking / application workflow
+                                      ranked shortlist
+                                             |
+                                             v
+                                  application workflow
 ```
 
 ### Planned provider strategy
