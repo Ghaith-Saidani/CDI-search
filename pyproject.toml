@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cdi-application-assistant"
-version = "0.1.0"
-description = "Transparent local evaluator for France Data/AI CDI offers"
+version = "0.2.0"
+description = "Decision-support system for a France-wide Data/AI CDI search"
 requires-python = ">=3.11"
 dependencies = ["pypdf>=6.0"]
 
@@ -14,6 +14,7 @@ test = ["reportlab>=5.0"]
 
 [project.scripts]
 cdi-evaluate = "cdi_assistant.cli:main"
+cdi-discover = "cdi_assistant.discovery_cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
